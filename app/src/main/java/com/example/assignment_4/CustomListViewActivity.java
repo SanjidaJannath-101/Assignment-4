@@ -1,6 +1,8 @@
 package com.example.assignment_4;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,12 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomListViewActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_list_view);
 
         ListView customListView = findViewById(R.id.customListView);
+        Button backButton = findViewById(R.id.backToMainButton);
 
         List<TechItem> techItems = new ArrayList<>();
         techItems.add(new TechItem(R.drawable.ic_ai, "Artificial Intelligence", "AI simulates human intelligence in machines."));
@@ -24,5 +28,11 @@ public class CustomListViewActivity extends AppCompatActivity {
 
         CustomListAdapter adapter = new CustomListAdapter(this, techItems);
         customListView.setAdapter(adapter);
+
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(CustomListViewActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        });
     }
 }
